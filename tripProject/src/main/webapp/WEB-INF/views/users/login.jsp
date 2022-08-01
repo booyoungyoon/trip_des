@@ -110,7 +110,7 @@ ul>li>a {
 }
 
 .login h2 {
-	color: aqua;
+	color: #212121;
 	font-size: 2em;
 	margin-bottom: 50px;
 }
@@ -169,6 +169,13 @@ ul>li>a {
 </head>
 <body>
 	<jsp:include page="../includes/header.jsp"></jsp:include>
+	
+	<!-- header card -->
+
+	<div class="card"></div>
+	<br>
+	<br>
+	
 	<form method="post" action="login.do" name="loginfrm">
 		<div class="Wallpapers">
 			<div class="login">
@@ -189,7 +196,7 @@ ul>li>a {
 				<div class="submit">
 					<input type="submit" value="로그인" onclick="return loginCheck()">
 				</div>
-				<jsp:include page="userFooter.jsp"></jsp:include>
+				<jsp:include page="userIncludes/userFooter.jsp"></jsp:include>
 			</div>
 		</div>
 	</form>
