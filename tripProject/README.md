@@ -77,15 +77,18 @@ create table destination (
     CONSTRAINT fk_user_to_destination foreign key(usernum) references users(usernum)
 );
 
--- 여행지 데이터 (api)
-create table destinatinodata (
-    num number(10) not null primary key,
-    title varchar2(150),
-    address varchar2(200),
-    firstimg varchar2(500),
-    secondimg varchar2(500),
-    mapx varchar2(50),
-    mapy varchar2(50)
+create table destination (
+    destinationNum number(10) not null primary key,
+    destinationTitle varchar2(150),
+    destinationAddress varchar2(200),
+    destinationFirstimg varchar2(500),
+    destinationSecondimg varchar2(500),
+    destinationMapx varchar2(50),
+    destinationMapy varchar2(50),
+    destinationContent varchar2(4000),
+    destinationCity varchar2(10),
+    usernum number not null,
+    CONSTRAINT fkUserToDestination foreign key(usernum) references users(usernum)
 );
 
 create table des_comment (
@@ -113,9 +116,6 @@ CREATE TABLE course (
 -- 회원목록 시퀀스
 create sequence users_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- 축제 시퀀스
-create sequence festival_seq
-START with 1 INCREMENT by 1 MINVALUE 1;
 -- 축제 데이터 시퀀스
 create sequence fesdata_num
 START with 1 INCREMENT by 1 MINVALUE 1;
@@ -127,9 +127,6 @@ create sequence board_comment_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
 -- 여행지 시퀀스
 create sequence destination_seq
-START with 1 INCREMENT by 1 MINVALUE 1;
--- 여행지 데이터 시퀀스
-create SEQUENCE desdata_seq 
 START with 1 INCREMENT by 1 MINVALUE 1;
 -- 여행지 댓글 시퀀스
 create sequence des_comment_seq
