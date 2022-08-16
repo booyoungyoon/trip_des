@@ -150,6 +150,10 @@
 						<input name="destinationFirstImg" class="form-control" value='<c:out value="${destination.destinationFirstImg}"/>'>
 						<br>
 					</div>
+					<div class="form-group">
+						<input name="destinationContent" class="form-control" value='<c:out value="${destination.destinationContent}"/>'>
+						<br>
+					</div>
 
 					<button type="submit" data-oper='update' class="btn btn-default">수정</button>
 					<button type="submit" data-oper='delete' class="btn btn-danger">삭제</button>

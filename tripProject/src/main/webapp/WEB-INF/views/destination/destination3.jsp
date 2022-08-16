@@ -165,21 +165,21 @@ font-size: 11pt;
 
 		<div class="box_rightType">
 			<ul>
-				<li style="margin-left: 25px"><button>서울시</button></li>
-				<li><button>경기도</button></li>
-				<li><button>강원도</button></li>
-				<li><button>충청북도</button></li>
-				<li><button>충청남도</button></li>
-				<li><button>경상북도</button></li>
-				<li><button>경상남도</button></li>
-				<li><button>전라북도</button></li>
-				<li><button>전라남도</button></li>
-				<li><button>제주도</button></li>
+				<li style="margin-left: 25px" onclick="location.href='/destination/list.do?destinationAddress=서울'"><button>서울시</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=경기'">경기도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=강원'">강원도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=충청북'">충청북도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=충청남'">충청남도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=경상북'">경상북도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=경상남'">경상남도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=전라북'">전라북도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=전라남'">전라남도</button></li>
+				<li><button onclick="location.href='/destination/list.do?destinationAddress=제주'">제주도</button></li>
 			</ul>
 		</div>
 		<br>
-			<table 
-				class="table table-striped table-bordered table-hover">
+			<table
+				class="table table-striped table-bordered table-hover" style="table-layout:fixed">
 					
 				<c:forEach items="${list}" var="destination">
 					<tr>
@@ -193,8 +193,9 @@ font-size: 11pt;
 					<a class='move' href=<c:out value="${destination.destinationNum}"/>>
 						<c:out value="${destination.destinationTitle}"/></td>
 					</tr>
-						<td><a class='move' href=<c:out value="${destination.destinationNum}"/>>
-						<c:out value="${destination.destinationAddress}"/></td>
+						<td style="text-overflow:ellipsis; overflow:hidden">
+						<a class='move' href=<c:out value="${destination.destinationNum}"/>>
+						<c:out value="${destination.destinationContent}"/></td>
 					<tr>
 						<td><a class='move' href=<c:out value="${destination.destinationNum}"/>>
 						<c:out value="${destination.destinationAddress}"/></td>

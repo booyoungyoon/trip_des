@@ -9,13 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>축제</title>
-<link rel="stylesheet" href="../fontawesome/css/all.min.css">
-<!-- https://fontawesome.com/ -->
-<link rel="stylesheet" href="../css/magnific-popup.css">
-<link rel="stylesheet" href="../css/nav.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/animate.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -33,8 +26,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f7f2591af5145e97bd2969fcf925e6f"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f7f2591af5145e97bd2969fcf925e6f"></script>
 <style>
 @font-face {
 	font-family: 'yg-jalnan';
@@ -63,9 +55,12 @@ ul>li>a {
 
 #slider {
 	width: 1000px;
-	height: 1800px;
+	height: 2000px;
 	margin: 0 auto;
 }
+h1 { text-align: center; }
+
+#menu button { font-size : 1.2em; }
 </style>
 
 </head>
@@ -83,9 +78,25 @@ ul>li>a {
 	<br>
 	<div id="slider">
 		<h1>축제</h1>
-	<hr>
-		<!-- 여기에 내용 넣으세요 -->
 
+<br>
+		<!-- 여기에 내용 넣으세요 -->
+<div id="menu" class="card text-center" style="border-radius: 30px;">
+  <div class="card-header" style="border-radius: 30px;" >
+    <button onclick="location.href='/festival/page.do?fesCity=서울'" type="button" class="btn btn-light fw-bolder">서울시</button>
+    <button onclick="location.href='/festival/page.do?fesCity=경기'" type="button" class="btn btn-light">경기도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=강원'" type="button" class="btn btn-light">강원도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=충청남'" type="button" class="btn btn-light">충청북도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=충청북'" type="button" class="btn btn-light">충청남도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=경상북'" type="button" class="btn btn-light">경상북도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=경상남'" type="button" class="btn btn-light">경상남도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=전라북'" type="button" class="btn btn-light">전라북도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=전라남'" type="button" class="btn btn-light">전라남도</button>
+    <button onclick="location.href='/festival/page.do?fesCity=제주'" type="button" class="btn btn-light">제주도</button>
+  </div>
+        
+</div>
+<br><br>
 
 		<div class="row  justify-content-center">
 			<c:forEach items="${list}" var="fes">
@@ -119,6 +130,7 @@ ul>li>a {
 				</div>
 			</c:forEach>
 		</div>
+		
 <!-- 페이지 처리 Start -->
 				<div class="pull-right">
 					  <ul class="pagination">
@@ -138,10 +150,30 @@ ul>li>a {
 					  </ul>
 				</div>
 				<!-- 페이지 처리 End -->
+				<!-- 검색조건 start -->
+					<form id = "SearchForm" action = "../festival/page.do" method="get" >
+						<select name='type'>
+							<option value="" <c:out value="${pageMaker.cri.type==null?'selected':''}"/>>검색</option>
+							<option value="T" <c:out value="${pageMaker.cri.type eq T?'selected':''}"/> >제목</option>
+							<option value="P" <c:out value="${pageMaker.cri.type eq P?'selected':''}"/>>지역</option>
+							
+						</select>
+						
+					<input type="text" name="keyword"  >	
+					<input type ="hidden" name="pageNum"value='${pageMaker.cri.pageNum}'/>	
+					<input type ="hidden" name="amount"value='${pageMaker.cri.amount}'/>	
+					
+					<button type="button" class="btn btn-outline-info">Search</button>	
+						
+					</form>
+				
+				<!-- 검색 조건 end -->
 				
 				<form id="actionForm" action="../festival/page.do" method="get">
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					  <input type="hidden" name="type" value='<c:out value="${cri.type}"/>'>
+               <input type="hidden" name="keyword"   value='<c:out value="${cri.keyword}"/>'>
 				</form>
 	
 		<script>
@@ -180,11 +212,29 @@ ul>li>a {
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit(); 
 	});
+    var searchForm = $("#searchForm");
+    
+    $("#searchForm button").on("click", function(e){
+       e.preventDefault();
+       
+       if(!searchForm.find("option:selected").val()){
+          alert("검색종류를 선택하세요.")
+          return false;
+       }
+
+       if(!searchForm.find("[name='keyword']").val()){
+          alert("키워드를 선택하세요.")
+          return false;
+       }
+       
+       searchForm.find("input[name='pageNum']").val(1);
+       searchForm.submit();
+    });
  
  </script>
 
 
-	<jsp:include page="../includes/footer.jsp"></jsp:include> 
+
 
 </body>
 

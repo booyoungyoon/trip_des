@@ -93,7 +93,7 @@ $(document).ready(function() {
 		<h3>여행지 추천 글 쓰기</h3>
 		<br>
 
-		<form method="post" action="/destination/register.do">
+		<form method="post" action="/destination/register.do" enctype="multipart/form-data">
 		<%-- <input type="hidden" name="userNum" value='<c:out value="${user.userNum}"/>'> --%>
 			<table border=1 width="100%">
 				<tr>
@@ -105,7 +105,11 @@ $(document).ready(function() {
 					<td><input type="text" name="destinationAddress" style="width: 100%"></td>
 				</tr>
 				<tr>
-				<td colspan="2"><textarea class="form-control" id="summernote" name="destinationFirstImg"></textarea>
+					<td align="center">썸네일</td>
+					<td><input type="file" name="destinationFirstImg" style="width: 100%"></td>
+				</tr>
+				<tr>
+				<td colspan="2"><textarea class="form-control" id="summernote" name="destinationSecondImg"></textarea>
 					</td>
 				</tr>
 			</table>

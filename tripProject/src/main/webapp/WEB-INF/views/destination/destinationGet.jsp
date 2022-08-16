@@ -148,7 +148,7 @@ font-size: 11pt;
 				</div>
 				<div class="form-group">
 					<label>주소</label>
-					<input name="destinationTitle" class="form-control" readonly="readonly" value='<c:out value="${destination.destinationAddress}"/>'><br>
+					<input name="destinationAddress" class="form-control" readonly="readonly" value='<c:out value="${destination.destinationAddress}"/>'><br>
 				</div>
 				<div class="form-group">
 					<label>사진</label>
@@ -156,7 +156,7 @@ font-size: 11pt;
 				</div>
 				<div class="form-group">
 					<label>내용</label>
-					<value="${destination.destinationFirstImg}"/>
+					 <textarea name="destinationContent" rows="10" class="form-control" readonly="readonly" style="resize: none;">${destination.destinationContent}</textarea>	
 				</div>
 				
 
@@ -184,6 +184,6 @@ font-size: 11pt;
 	});
 </script>
 
-<jsp:include page="../includes/footer.jsp"></jsp:include>    
+<%-- <jsp:include page="../includes/footer.jsp"></jsp:include> --%>
 </body>
 </html>
