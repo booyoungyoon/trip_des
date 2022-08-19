@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -58,6 +60,8 @@ max-width: 1000px;
 			<div class="row">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
+					
+					
 					<thead>
 						<tr>
 							<th style="backgorund-color: #eeeeee; text-align: center;">번호</th>
@@ -66,16 +70,63 @@ max-width: 1000px;
 							<th style="backgorund-color: #eeeeee; text-align: center;">작성일</th>
 						</tr>
 					</thead>
-					<tbody>
+					
+					<c:forEach items="${list}" var="board">
+					
 						<tr>
-							<!-- 테스트 코드 -->
-							<td>1</td>
-							<td>안녕하세요</td>
-							<td>황인주</td>
-							<td>2022-08-04</td>
+							<td><c:out value="${board.boardNum}" /></td>
+							<td>
+								<a class='move'  href=<c:out value="${board.boardNum}"/>>
+								<c:out value="${board.boardNum}"/></a>
+							</td>
+							<td><c:out value="${board.boardNum}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${board.boardDate}" /></td>
 						</tr>
-					</tbody>
+					</c:forEach>
 				</table>
+				
+				<!-- 검색 조건 Start-->
+					<form id="searchForm" action="/board/board" method="get">
+						<select name="type">
+							<option value=""   	<c:out value="${pageMaker.cri.type == null ? 'selected' : '' }"/>  	>--</option>
+							<option value="T"
+							<c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : '' }"/>
+							>제목</option>
+							<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : '' }"/>>내용</option>
+							<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : '' }"/>>작성자</option>
+							<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : '' }"/>>제목+내용</option>
+							<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : '' }"/>>제목+작성자</option>
+							<option value="TCW"  <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : '' }"/> >제목+내용+작성자</option>
+						</select>
+						
+						<input type="text" name="keyword" />
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<button class="btn btn-primary">Search</button>
+					</form>	
+							
+				<!-- 검색 조건 End -->
+				
+				<!-- 페이지 처리 Start -->
+				<div class="pull-right">
+					  <ul class="pagination">
+					  
+					    <c:if test="${pageMaker.prev }">
+						    <li class="paginate_button previous"><a  href="${pageMaker.startPage-1}">Previous</a></li>
+					    </c:if>
+				
+					  	<c:forEach  var="num"  begin="${pageMaker.startPage }"  end="${pageMaker.endPage }">
+						    <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active" : "" }">
+						    <a  href="${num }">${num }</a></li>
+					  	</c:forEach>
+					    
+					    <c:if test="${pageMaker.next }">
+						    <li class="paginate_button next"><a  href="${pageMaker.endPage+1}">Next</a></li>
+					    </c:if>
+					  </ul>
+				</div>
+				<!-- 페이지 처리 End -->
 
 			</div>
 		</div>

@@ -3,7 +3,77 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trip.mapper.BoardMapper">
+
+	<sql id="criterial">
+		<trim prefix="(" suffix=") and">
+			<foreach collection="typeArr" item="type" separator="or">
+				<if test="type=='T'.toString()">
+					title like '%'|| #{keyword} ||'%'
+				</if>
+				<if test="type=='C'.toString()">
+					content like '%'|| #{keyword} ||'%'
+				</if>
+				<if test="type=='W'.toString()">
+					writer like '%'|| #{keyword} ||'%'
+				</if>
+			</foreach>
+		</trim>
+	</sql>
+
 	<select id="getList" resultType="com.trip.domain.BoardVO">
-	select * from board where num>0
+		select * from board where
+		boardNum>0
 	</select>
+	
+	<select id="getListWithPagging"
+		resultType="com.trip.domain.BoardVO">
+		<![CDATA[
+			select boardNum, boardTitle, boardContent, boardDate, hits, boardImage, boardLike, userNum
+		from(
+			select /*+ index_desc(tbl_board pk_board) */
+			rownum rn, boardNum, boardTitle, boardContent, boardDate, hits, boardImage, boardLike, userNum
+			from board
+		where
+		]]>
+		
+		<include refid="criterial"></include>
+		
+		<![CDATA[
+		ROWNUM <= #{pageNum}*#{amount})
+		where
+		rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board where
+		<include refid="criterial"></include>
+		boardNum > 0
+	</select>
+	
+	<!-- 검색조건 -->
+	<select id="searchTest" resultType="com.trip.domain.BoardVO">
+	<![CDATA[
+	select * from board
+	where
+	]]>
+		<trim suffix="and">
+			<foreach collection="map" index="key" item="val"
+				separator="or" open="(" close=")">
+				<if test="key == 'T'.toString()">
+					title like #{val}
+				</if>
+				<if test="key == 'C'.toString()">
+					content like #{val}
+				</if>
+				<if test="key == 'W'.toString()">
+					writer like #{val}
+				</if>
+			</foreach>
+		</trim>
+		<![CDATA[
+	rownum<10
+		]]>
+	</select>
+
 </mapper>

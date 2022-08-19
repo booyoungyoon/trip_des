@@ -14,11 +14,11 @@ import java.util.Date;
    usernum number not null,
  */
 public class BoardVO {
-	private int board_num;
-	private String board_title;
-	private String board_content;
-	private Date board_date;
+	private int boardNum;
+	private String boardTitle;
+	private String boardContent;
+	private Date boardDate;
 	private String hits;
-	private String board_image;
-	private String board_like;
+	private String boardImage;
+	private String boardLike;
 }
