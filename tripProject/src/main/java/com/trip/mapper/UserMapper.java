@@ -2,6 +2,7 @@ package com.trip.mapper;
 
 import java.util.List;
 
+import com.trip.domain.BoardVO;
 import com.trip.domain.UserVO;
 
 public interface UserMapper {
@@ -16,4 +17,5 @@ public interface UserMapper {
 	public List<UserVO> getFindId(UserVO vo);
 	public int delete(int userNum);
 	public int update(UserVO vo);
+	public void insertSelectKey(BoardVO vo);
 }

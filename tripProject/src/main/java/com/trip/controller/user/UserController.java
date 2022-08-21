@@ -51,6 +51,7 @@ public class UserController {
 			return "redirect:/home.do";
 		}
 		model.addAttribute("message", "잘못된 회원정보입니다.");
+		
 		return "users/login";
 	}
 	
@@ -246,6 +247,7 @@ public class UserController {
 			user = service.login(user);
 			
 			session.setAttribute("user", user);
+			
 			
 			log.info(user.getAdmin());
 			

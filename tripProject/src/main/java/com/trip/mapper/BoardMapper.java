@@ -8,8 +8,8 @@ import com.trip.domain.Criteria;
 
 public interface BoardMapper {
 	public List<BoardVO> getList();
-	public BoardVO read(Long bno);
-	public int delete(Long bno);
+	public BoardVO get(int boardNum);
+	public int delete(int boardNum);
 	public int insert(BoardVO vo);
 	public int insertSelectKey(BoardVO vo);
 	public int update(BoardVO vo);

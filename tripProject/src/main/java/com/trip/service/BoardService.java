@@ -7,9 +7,9 @@ import com.trip.domain.Criteria;
 
 public interface BoardService {
 	public void register(BoardVO vo);
-	public BoardVO get(Long bno);
+	public BoardVO get(int boardNum);
 	public int modify(BoardVO vo);
-	public int remove(Long bno);
+	public int remove(int boardNum);
 	public List<BoardVO> getList(Criteria cri);
 	public int getTotal(Criteria cri);
 }

@@ -78,4 +78,16 @@
 		where usernum = #{userNum}
 	</update>
 	
+	<!-- 게시글 등록 -->
+	<insert id="insertSelectKey">
+
+		<selectKey keyProperty="board_num" order="BEFORE"
+			resultType="int">
+			select board_seq.nextval from dual
+		</selectKey>
+		insert into BOARD(board_num, board_title, board_content, hits, board_like, usernum)
+		values(board_seq.nextval,
+		#{board_title}, #{board_content}, 0, 0, #{usernum})
+	</insert>
+	
 </mapper>

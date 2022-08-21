@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.trip.domain.BoardVO;
 import com.trip.domain.UserVO;
 import com.trip.mapper.UserMapper;
 import com.trip.service.UserService;
@@ -83,6 +84,12 @@ public class UserServiceImpl implements UserService{
 	public void registerToKakao(UserVO vo) {
 		log.info("------ 카카오 회원가입 --------");
 		mapper.kakaoInsert(vo);
+	}
+
+	@Override
+	public void register(BoardVO vo) {
+		mapper.insertSelectKey(vo);
+		
 	}
 
 

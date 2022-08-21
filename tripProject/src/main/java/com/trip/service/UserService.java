@@ -2,6 +2,7 @@ package com.trip.service;
 
 import java.util.List;
 
+import com.trip.domain.BoardVO;
 import com.trip.domain.UserVO;
 
 public interface UserService {
@@ -16,4 +17,5 @@ public interface UserService {
 	public List<UserVO> idList(UserVO vo);
 	public int remove(int userNum);
 	public int modify(UserVO vo);
+	public void register(BoardVO vo);
 }
